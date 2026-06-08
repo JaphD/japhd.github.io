@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Yafet Daniel — EE Portfolio</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#0d0d0d;--bg2:#141414;--bg3:#1a1a1a;--bg4:#222;
+  --text:#f0f0f0;--text2:#999;--text3:#555;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.14);
+  --accent:#f0f0f0;--accent-dim:#666;
+  --copper:#c8922a;--copper2:#e8b84a;
+  --r:4px;--rl:6px;
+}
+body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{background:var(--bg);border-bottom:1px solid var(--border);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100}
+.nav-logo{font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text)}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-size:11px;color:var(--text2);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+
+/* HERO */
+.hero{padding:6rem 2.5rem 5rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero-pcb{position:absolute;inset:0;opacity:.04;pointer-events:none}
+.hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text2);margin-bottom:1.25rem}
+.hero h1{font-size:clamp(42px,7vw,80px);font-weight:700;letter-spacing:-.02em;line-height:1;color:#fff;margin-bottom:1.25rem}
+.hero h1 em{font-style:normal;color:var(--text2)}
+.hero-sub{font-size:14px;color:var(--text2);max-width:460px;line-height:1.8;margin-bottom:2rem}
+.hero-links{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:var(--r);font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:1px solid var(--border2);background:transparent;color:var(--text2);transition:all .2s;font-family:inherit;text-decoration:none}
+.btn:hover{border-color:rgba(255,255,255,.4);color:var(--text)}
+.btn-primary{border-color:var(--text);color:var(--bg);background:var(--text)}
+.btn-primary:hover{background:#ccc;border-color:#ccc;color:var(--bg)}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border)}
+
+/* SECTIONS */
+section.cv-section{max-width:960px;margin:0 auto;padding:3rem 1.5rem;scroll-margin-top:52px}
+section.cv-section+section.cv-section{border-top:1px solid var(--border)}
+.sec-header{display:flex;align-items:baseline;gap:1.5rem;margin-bottom:2rem}
+.sec-num{font-size:11px;color:var(--text3);letter-spacing:.1em;font-weight:400;min-width:24px}
+.sec-title{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text2)}
+
+/* ABOUT */
+.about-text{font-size:15px;color:var(--text2);line-height:1.9;max-width:680px;margin-bottom:1.75rem;border-left:1px solid var(--border2);padding-left:1.25rem}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.about-block{background:var(--bg2);padding:1.25rem 1.5rem}
+.about-block h4{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.about-block p{font-size:13px;color:var(--text2);line-height:1.7}
+
+/* SKILLS STRIP */
+.skills-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 2.5rem;display:flex;flex-wrap:wrap;gap:2rem;align-items:center;justify-content:center;background:var(--bg2)}
+.skill{font-size:11px;color:var(--text3);letter-spacing:.08em;display:flex;align-items:center;gap:6px}
+.skill i{font-size:13px;color:var(--accent-dim)}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column}
+.tl-item{display:grid;grid-template-columns:120px 1fr;gap:2rem;padding:1.75rem 0;border-bottom:1px solid var(--border)}
+.tl-item:last-child{border-bottom:none}
+.tl-date{font-size:11px;color:var(--text3);letter-spacing:.04em;padding-top:2px;line-height:1.6}
+.tl-body h3{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem;letter-spacing:-.01em}
+.tl-body .tl-org{font-size:11px;color:var(--copper);letter-spacing:.06em;margin-bottom:.5rem;text-transform:uppercase}
+.tl-body p{font-size:13px;color:var(--text2);line-height:1.75}
+.tl-tag{display:inline-block;border:1px solid var(--border2);border-radius:2px;padding:2px 8px;font-size:10px;color:var(--text3);letter-spacing:.06em;margin-top:.65rem}
+
+/* PROJECTS */
+.proj-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.75rem}
+.filter-btn{padding:5px 14px;border-radius:var(--r);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;font-family:inherit;transition:all .2s}
+.filter-btn.active{border-color:rgba(255,255,255,.35);color:var(--text)}
+.filter-btn:hover:not(.active){border-color:var(--border2);color:var(--text2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border)}
+.card{background:var(--bg2);cursor:pointer;transition:background .2s;position:relative;overflow:hidden}
+.card:hover{background:var(--bg3)}
+.card-thumb{height:170px;background:var(--bg3);position:relative;overflow:hidden}
+.card-body{padding:1rem 1.25rem;border-top:1px solid var(--border)}
+.card-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem}
+.card-cat{font-size:10px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase}
+.badge{font-size:10px;padding:2px 8px;border-radius:2px;font-weight:500;letter-spacing:.04em;border:1px solid}
+.badge-prod{color:#6dbf6d;border-color:rgba(109,191,109,.3)}
+.badge-proto{color:#c8922a;border-color:rgba(200,146,42,.3)}
+.badge-prog{color:#6699cc;border-color:rgba(102,153,204,.3)}
+.badge-verified{color:#6dbf6d;border-color:rgba(109,191,109,.5);background:rgba(109,191,109,.08);font-weight:600}
+.card h3{font-size:13px;font-weight:600;color:var(--text);margin-bottom:.25rem;letter-spacing:-.01em}
+.card p{font-size:12px;color:var(--text2);margin-bottom:.65rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.65}
+.card-specs{display:flex;gap:10px;flex-wrap:wrap}
+.spec{font-size:10px;color:var(--text3);display:flex;align-items:center;gap:3px;letter-spacing:.04em}
+.spec i{font-size:11px;color:var(--accent-dim)}
+
+/* COMPETITION */
+.comp-highlight{border:1px solid var(--border);background:var(--bg2);margin-bottom:1.5rem}
+.comp-header{padding:2rem;border-bottom:1px solid var(--border);position:relative}
+.comp-header::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent)}
+.comp-eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:.75rem}
+.comp-header h3{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-.02em;margin-bottom:.5rem}
+.comp-header p{font-size:12px;color:var(--text2);margin-bottom:1.25rem}
+.comp-awards{display:flex;flex-wrap:wrap;gap:8px}
+.award-badge{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--border2);border-radius:2px;padding:4px 12px;font-size:11px;color:var(--text2);letter-spacing:.06em}
+.award-badge i{font-size:12px;color:var(--copper)}
+.comp-body{padding:1.5rem 2rem}
+.comp-body p{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:.75rem}
+.comp-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
+.tag{border:1px solid var(--border);border-radius:2px;padding:3px 9px;font-size:10px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase}
+
+/* SKILLS */
+.skills-groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.skill-group{background:var(--bg2);padding:1.25rem}
+.skill-group h4{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem;display:flex;align-items:center;gap:6px}
+.skill-group h4 i{font-size:13px}
+.skill-list{display:flex;flex-direction:column;gap:6px}
+.skill-item-row{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--text2)}
+.skill-bar{width:56px;height:2px;background:var(--bg4);border-radius:1px;overflow:hidden}
+.skill-bar-fill{height:100%;background:var(--text2);border-radius:1px}
+
+/* CERTS */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.cert-card{background:var(--bg2);padding:1.1rem 1.25rem;display:flex;gap:.85rem;align-items:flex-start;transition:background .2s}
+.cert-card:hover{background:var(--bg3)}
+.cert-icon{width:32px;height:32px;border-radius:var(--r);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cert-icon i{font-size:15px;color:var(--text3)}
+.cert-info h4{font-size:12px;font-weight:600;color:var(--text);margin-bottom:.15rem;letter-spacing:-.01em}
+.cert-info p{font-size:11px;color:var(--text3)}
+.cert-info .cert-score{font-size:11px;color:var(--copper);margin-top:.2rem}
+.cert-info .cert-detail{font-size:10px;color:var(--text3);margin-top:3px}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(6px)}
+.overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border2);width:100%;max-width:820px;max-height:90vh;overflow-y:auto}
+.modal-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;position:sticky;top:0;background:var(--bg2);z-index:1}
+.modal-header h2{font-size:16px;font-weight:700;color:var(--text);margin-bottom:.15rem;letter-spacing:-.01em}
+.modal-header p{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em}
+.close-btn{background:none;border:1px solid var(--border);cursor:pointer;padding:5px 9px;color:var(--text2);font-size:15px;transition:all .2s}
+.close-btn:hover{border-color:var(--border2);color:var(--text)}
+.modal-tabs{display:flex;border-bottom:1px solid var(--border);padding:0 1.5rem;background:var(--bg2)}
+.tab-btn{padding:.65rem 1rem;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:none;background:none;cursor:pointer;color:var(--text3);border-bottom:1px solid transparent;margin-bottom:-1px;font-family:inherit;transition:all .2s}
+.tab-btn.active{color:var(--text);border-bottom-color:var(--text)}
+.tab-pane{display:none;padding:1.5rem}
+.tab-pane.active{display:block}
+#viewer-container{width:100%;height:340px;background:#050505;border:1px solid var(--border);overflow:hidden;position:relative}
+#viewer-canvas{width:100%;height:100%;display:block}
+.viewer-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:var(--text3);font-size:10px;letter-spacing:.08em;padding:4px 12px;border-radius:2px;border:1px solid var(--border)}
+.specs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.spec-block{background:var(--bg3);padding:.85rem 1rem}
+.spec-block label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.2rem}
+.spec-block .spec-val{font-size:14px;font-weight:600;color:var(--text);display:block}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1px;background:var(--border)}
+.gallery-placeholder{aspect-ratio:4/3;background:var(--bg3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:var(--text3)}
+.gallery-placeholder i{font-size:22px}
+.gallery-placeholder span{font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.tl-gallery{margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.tl-gallery-item{aspect-ratio:4/3;background:var(--bg3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:var(--text3);transition:background .2s;cursor:default}
+.tl-gallery-item:hover{background:var(--bg4)}
+.tl-gallery-item i{font-size:20px}
+.tl-gallery-item span{font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+
+footer{text-align:center;padding:3rem;font-size:11px;color:var(--text3);border-top:1px solid var(--border);letter-spacing:.06em;scroll-margin-top:52px}
+footer strong{color:var(--text2)}
+footer a{color:var(--text2);text-decoration:none}
+footer a:hover{color:var(--text)}
+
+/* MOBILE NAV */
+.nav-hamburger{display:none;background:none;border:1px solid var(--border);cursor:pointer;padding:5px 9px;color:var(--text2);font-size:16px;line-height:1;transition:all .2s}
+.nav-hamburger:hover{border-color:var(--border2);color:var(--text)}
+@media(max-width:700px){
+  .nav-links{display:none;position:absolute;top:52px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--border);flex-direction:column;gap:0;padding:.5rem 0;z-index:99}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:.65rem 2.5rem;font-size:11px}
+  .nav-hamburger{display:block}
+  .tl-item{grid-template-columns:80px 1fr;gap:.75rem}
+  .about-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Yafet Daniel</div>
+  <div class="nav-links" id="nav-links">
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#competitions">Awards</a>
+    <a href="#skills">Skills</a>
+    <a href="#certs">Certs</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="nav-hamburger" id="nav-toggle" aria-label="Toggle navigation"><i class="ti ti-menu-2"></i></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-pcb" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#ffffff" stroke-width="1" fill="none">
+      <polyline points="0,100 150,100 150,60 380,60 380,100 520,100 520,150 720,150 720,80 920,80 920,130 1000,130"/>
+      <polyline points="0,260 100,260 100,300 280,300 280,220 460,220 460,270 640,270 640,190 860,190 860,240 1000,240"/>
+      <polyline points="150,0 150,60"/><polyline points="380,60 380,0"/><polyline points="520,150 520,400"/><polyline points="720,80 720,0"/><polyline points="280,300 280,400"/><polyline points="640,270 640,400"/>
+      <circle cx="150" cy="100" r="4" fill="white"/><circle cx="380" cy="100" r="4" fill="white"/><circle cx="520" cy="150" r="4" fill="white"/><circle cx="720" cy="80" r="4" fill="white"/><circle cx="280" cy="220" r="4" fill="white"/><circle cx="640" cy="190" r="4" fill="white"/>
+      <rect x="390" y="65" width="50" height="32" rx="1" fill="white" opacity=".15"/>
+      <rect x="620" y="155" width="40" height="26" rx="1" fill="white" opacity=".15"/>
+      <rect x="100" y="265" width="36" height="24" rx="1" fill="white" opacity=".15"/>
+    </g>
+  </svg>
+  <div class="hero-eyebrow">Electrical &amp; Computer Engineering · Microelectronics · AAU CTBE</div>
+  <h1>Yafet<br><em>Daniel</em></h1>
+  <p class="hero-sub">EE graduate specializing in PCB design, embedded systems, and microelectronics — from schematic capture and firmware to power integrity and RF hardware.</p>
+  <div class="hero-links">
+    <a class="btn btn-primary" href="#projects">Projects</a>
+    <a class="btn" href="https://github.com/JaphD" target="_blank"><i class="ti ti-brand-github" aria-hidden="true"></i> GitHub</a>
+    <a class="btn" href="https://www.linkedin.com/in/yafet-daniel-6602a6334/" target="_blank"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
+    <a class="btn" href="mailto:japhethdanny@gmail.com"><i class="ti ti-mail" aria-hidden="true"></i> Email</a>
+  </div>
+</section>
+
+<div class="skills-strip">
+  <div class="skill"><i class="ti ti-cpu" aria-hidden="true"></i> Altium Designer</div>
+  <div class="skill"><i class="ti ti-cpu" aria-hidden="true"></i> KiCad</div>
+  <div class="skill"><i class="ti ti-bolt" aria-hidden="true"></i> LTspice</div>
+  <div class="skill"><i class="ti ti-microchip" aria-hidden="true"></i> MSP430 · STM32 · ESP32 · Arduino</div>
+  <div class="skill"><i class="ti ti-wave-sine" aria-hidden="true"></i> Oscilloscope · VNA</div>
+  <div class="skill"><i class="ti ti-code" aria-hidden="true"></i> C · Python · Django</div>
+  <div class="skill"><i class="ti ti-antenna" aria-hidden="true"></i> RF · 5G</div>
+  <div class="skill"><i class="ti ti-plug" aria-hidden="true"></i> Power Systems</div>
+</div>
+
+<!-- ABOUT -->
+<section class="cv-section" id="about">
+  <div class="sec-header"><span class="sec-num">01</span><span class="sec-title">About</span></div>
+  <p class="about-text">Electrical and Computer Engineering graduate (Microelectronics) from Addis Ababa University CTBE, graduating with very great distinction. Hands-on experience across the full hardware stack — PCB design in Altium Designer, firmware development in C for MSP430 and STM32 microcontrollers, and power integrity analysis through a professional internship at DAFTech. Also holds a background in backend web development via ALX Africa and participated in a Finland-Africa COIL seminar with Aalto University on 5G solutions. Part of the team that swept all categories at the African VEX Robotics Championship 2025, qualifying for VEX Worlds in Dallas, TX.</p>
+  <div class="about-grid">
+    <div class="about-block"><h4>Interests</h4><p>Microelectronics, PCB design, embedded systems, power integrity, signal integrity, RF hardware, 5G systems.</p></div>
+    <div class="about-block"><h4>Status</h4><p>B.Sc. ECE (Microelectronics) graduate, AAU CTBE. Open to full-time roles, research positions, and hardware collaborations.</p></div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="cv-section" id="education">
+  <div class="sec-header"><span class="sec-num">02</span><span class="sec-title">Education</span></div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">May 2021<br>Jul 2026</div>
+      <div class="tl-body">
+        <h3>B.Sc. Electrical and Computer Engineering — Microelectronics</h3>
+        <div class="tl-org">Addis Ababa University · CTBE · Addis Ababa, Ethiopia</div>
+        <p>Graduated with very great distinction. Coursework: Analog Circuit Design, Digital Electronics, Microelectronics, Signal Processing, Control Systems, PCB Design, Electromagnetics, Microcontrollers.</p>
+        <span class="tl-tag">Very Great Distinction</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Apr 2025<br>Jun 2025</div>
+      <div class="tl-body">
+        <h3>DICE-EV0004 — 5G Technologies &amp; Services for Business (3 ECTS)</h3>
+        <div class="tl-org">Aalto University · AAU · Obafemi Awolowo University · NUST</div>
+        <p>Multinational COIL seminar on 5G architecture, massive-MIMO, human-centered design, and digital entrepreneurship. Pitched "Voice Recognition &amp; Interpretation in Banking and Finance using 5G" in a cross-national team. Cert. issued 1 July 2025, Espoo, Finland.</p>
+        <span class="tl-tag">International · 3 ECTS · Aalto University</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Jan 2025<br>Sep 2025</div>
+      <div class="tl-body">
+        <h3>Professional Foundations &amp; Backend Web Development</h3>
+        <div class="tl-org">ALX Africa · Addis Ababa, Ethiopia</div>
+        <p>Professional Foundations (cert. 15 Apr 2025): 14-week program on workplace skills, research, productivity, and MVP development. Backend Web Development (cert. 13 Sep 2025): 16-week ALX Software Engineering programme — Python, Django, DRF, APIs, MySQL, Git, GitHub.</p>
+        <span class="tl-tag">Python · Django · DRF · MySQL</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Sep 2017<br>Jul 2021</div>
+      <div class="tl-body">
+        <h3>High School Diploma</h3>
+        <div class="tl-org">South West Academy · Addis Ababa, Ethiopia</div>
+        <p>Consistently achieved top academic performance with a focus on English and Communication.</p>
+        <span class="tl-tag">High School</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="cv-section" id="experience">
+  <div class="sec-header"><span class="sec-num">03</span><span class="sec-title">Experience</span></div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">Dec 2025<br>Present</div>
+      <div class="tl-body">
+        <h3>PCB Design Lead — Air Quality Monitoring Project</h3>
+        <div class="tl-org">C40 Cities · Addis Ababa, Ethiopia · Part-time</div>
+        <p>Leading the PCB Design team within a multi-disciplinary initiative funded and supported by C40 Cities, encompassing Embedded Systems, Web Development, and AI &amp; Data Analysis sub-teams. Responsible for the design and iterative development of a single-sided breakout module for an air quality monitoring node — from schematic capture through to locally etched PCB fabrication and bring-up. Managed multiple board revisions, refining layout, component placement, and signal integrity across each iteration.</p>
+        <span class="tl-tag">PCB Design · Single-Sided · Breakout Module · Iterative Fabrication · C40</span>
+        <div class="tl-gallery">
+          <div class="tl-gallery-item"><i class="ti ti-circuit-board" aria-hidden="true"></i><span>PCB Layout</span></div>
+          <div class="tl-gallery-item"><i class="ti ti-photo-plus" aria-hidden="true"></i><span>Etched Board v1</span></div>
+          <div class="tl-gallery-item"><i class="ti ti-photo-plus" aria-hidden="true"></i><span>Etched Board v2</span></div>
+          <div class="tl-gallery-item"><i class="ti ti-photo-plus" aria-hidden="true"></i><span>Assembly</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">May 2025<br>Jan 2026</div>
+      <div class="tl-body">
+        <h3>Embedded Systems and PCB Design Intern</h3>
+        <div class="tl-org">DAFTech Social ICT Solutions · Addis Ababa, Ethiopia · On-site</div>
+        <p>Design PCBs using Altium Designer and develop firmware for MSP430 MCU based boards. Program in C with Code Composer Studio, focusing on code optimization and hardware integration. Performed PDN analysis with Keysight tools to validate power integrity. Implemented Exponential Moving Average (EMA) in firmware for improved measurement accuracy.</p>
+        <span class="tl-tag">Altium · MSP430 · C · CCS · PDN</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Nov 2024<br>Nov 2025</div>
+      <div class="tl-body">
+        <h3>Core Team Member — 5Kbot, VEX Robotics Competition</h3>
+        <div class="tl-org">AAU AI &amp; Robotics Club · Addis Ababa, Ethiopia · Part-time</div>
+        <p>Collaborated in a 15-member inter-departmental team (electrical, mechanical, software, biomedical) to design, assemble, and iterate a competitive VEX V5 robot over 3 months. Handled wiring, sensor integration, and autonomous/driver-controlled feature development. Core strategist — secured Tournament Champion, Robot Skills Champion, and Excellence Award at the African VEX Robotics Championship (Mar 13–15, 2025), qualifying for VEX World Championship in Dallas, TX.</p>
+        <span class="tl-tag">VEX V5 · Wiring · Sensor Integration · Strategy</span>
+        <div class="tl-gallery">
+          <div class="tl-gallery-item"><i class="ti ti-robot" aria-hidden="true"></i><span>Robot Build</span></div>
+          <div class="tl-gallery-item"><i class="ti ti-photo-plus" aria-hidden="true"></i><span>Competition</span></div>
+          <div class="tl-gallery-item"><i class="ti ti-photo-plus" aria-hidden="true"></i><span>Award Ceremony</span></div>
+          <div class="tl-gallery-item"><i class="ti ti-photo-plus" aria-hidden="true"></i><span>Team Photo</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="cv-section" id="projects">
+  <div class="sec-header"><span class="sec-num">04</span><span class="sec-title">Projects</span></div>
+  <div class="proj-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="biomedical">Biomedical</button>
+    <button class="filter-btn" data-filter="iot">IoT</button>
+    <button class="filter-btn" data-filter="power">Power</button>
+    <button class="filter-btn" data-filter="pcb">PCB</button>
+  </div>
+  <div class="grid" id="project-grid"></div>
+</section>
+
+<!-- COMPETITIONS -->
+<section class="cv-section" id="competitions">
+  <div class="sec-header"><span class="sec-num">05</span><span class="sec-title">Competitions &amp; Extracurriculars</span></div>
+  <div class="comp-highlight">
+    <div class="comp-header">
+      <div class="comp-eyebrow">African VEX Robotics Championship · March 2025 · Addis Ababa, ET</div>
+      <h3>Tournament Champion · Robot Skills Champion · Excellence Award</h3>
+      <p>Inter-departmental team · AAU AI &amp; Robotics Club · VEX V5/U Division · Hosted by MiNT &amp; Ethio-Robo Robotics</p>
+      <div class="comp-awards">
+        <span class="award-badge"><i class="ti ti-trophy" aria-hidden="true"></i> Tournament Champion</span>
+        <span class="award-badge"><i class="ti ti-trophy" aria-hidden="true"></i> Robot Skills Champion</span>
+        <span class="award-badge"><i class="ti ti-star" aria-hidden="true"></i> Excellence Award</span>
+        <span class="award-badge"><i class="ti ti-world" aria-hidden="true"></i> VEX Worlds Qualifier — Dallas, TX</span>
+      </div>
+    </div>
+    <div class="comp-body">
+      <p>Designed and built <strong>5Kbot</strong>, a VEX V5 competition robot, as part of an interdisciplinary team spanning electrical, mechanical, software, and biomedical engineering at AAU. Responsible for wiring architecture and sensor integration — ensuring reliable signal paths and actuator control under competition conditions. Iterated over multiple design cycles resolving technical challenges to achieve an efficient final build. Served as core strategist for the team.</p>
+      <p>The robot swept all major categories at the African VEX Robotics Championship, qualifying for the <strong>VEX World Championship in Dallas, Texas</strong>.</p>
+      <div class="comp-tags">
+        <span class="tag">VEX V5</span><span class="tag">Sensor Integration</span><span class="tag">Wiring</span><span class="tag">Electromechanical</span><span class="tag">Strategy</span>
+      </div>
+      <a class="btn" href="https://github.com/JaphD/Vex-V5" target="_blank" style="margin-top:.75rem"><i class="ti ti-brand-github" aria-hidden="true"></i> View on GitHub</a>
+    </div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">Present</div>
+      <div class="tl-body">
+        <h3>AAU AI &amp; Robotics Club</h3>
+        <div class="tl-org">Addis Ababa University</div>
+        <p>Active member contributing to hardware design and integration for robotics projects and competitions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="cv-section" id="skills">
+  <div class="sec-header"><span class="sec-num">06</span><span class="sec-title">Skills</span></div>
+  <div class="skills-groups">
+    <div class="skill-group"><h4><i class="ti ti-cpu" aria-hidden="true"></i> EDA & PCB</h4><div class="skill-list">
+      <div class="skill-item-row"><span>Altium Designer</span><div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+      <div class="skill-item-row"><span>KiCad</span><div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+      <div class="skill-item-row"><span>Proteus</span><div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+      <div class="skill-item-row"><span>LTspice</span><div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+    </div></div>
+    <div class="skill-group"><h4><i class="ti ti-microchip" aria-hidden="true"></i> Embedded & MCU</h4><div class="skill-list">
+      <div class="skill-item-row"><span>MSP430 / CCS</span><div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+      <div class="skill-item-row"><span>STM32</span><div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+      <div class="skill-item-row"><span>ESP32</span><div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+      <div class="skill-item-row"><span>Arduino</span><div class="skill-bar"><div class="skill-bar-fill" style="width:82%"></div></div></div>
+      <div class="skill-item-row"><span>Firmware (C)</span><div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+      <div class="skill-item-row"><span>PDN Analysis</span><div class="skill-bar"><div class="skill-bar-fill" style="width:70%"></div></div></div>
+    </div></div>
+    <div class="skill-group"><h4><i class="ti ti-wave-sine" aria-hidden="true"></i> Lab & Test</h4><div class="skill-list">
+      <div class="skill-item-row"><span>Oscilloscope</span><div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+      <div class="skill-item-row"><span>Multimeter</span><div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+      <div class="skill-item-row"><span>Keysight Tools</span><div class="skill-bar"><div class="skill-bar-fill" style="width:70%"></div></div></div>
+    </div></div>
+    <div class="skill-group"><h4><i class="ti ti-code" aria-hidden="true"></i> Programming</h4><div class="skill-list">
+      <div class="skill-item-row"><span>C</span><div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+      <div class="skill-item-row"><span>Python</span><div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+      <div class="skill-item-row"><span>Django / DRF</span><div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+      <div class="skill-item-row"><span>Git / GitHub</span><div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+    </div></div>
+    <div class="skill-group"><h4><i class="ti ti-antenna" aria-hidden="true"></i> RF & Comms</h4><div class="skill-list">
+      <div class="skill-item-row"><span>5G Architecture</span><div class="skill-bar"><div class="skill-bar-fill" style="width:65%"></div></div></div>
+      <div class="skill-item-row"><span>Massive-MIMO</span><div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div></div>
+      <div class="skill-item-row"><span>RF Front-End</span><div class="skill-bar"><div class="skill-bar-fill" style="width:65%"></div></div></div>
+    </div></div>
+    <div class="skill-group"><h4><i class="ti ti-plug" aria-hidden="true"></i> Systems</h4><div class="skill-list">
+      <div class="skill-item-row"><span>VEX V5</span><div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+      <div class="skill-item-row"><span>Sensor Integration</span><div class="skill-bar"><div class="skill-bar-fill" style="width:82%"></div></div></div>
+      <div class="skill-item-row"><span>Wiring & Harness</span><div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section class="cv-section" id="certs">
+  <div class="sec-header"><span class="sec-num">07</span><span class="sec-title">Certificates &amp; Scores</span></div>
+  <div class="certs-grid">
+    <div class="cert-card">
+      <div class="cert-icon"><i class="ti ti-language" aria-hidden="true"></i></div>
+      <div class="cert-info"><h4>IELTS Academic</h4><p>British Council · Dec 2025</p><div class="cert-score">8.5 / 9 — CEFR C2 Proficient</div><div class="cert-detail">L:9.0 · R:9.0 · W:7.5 · S:8.0 · TRF: 25ET501968HAIY001A</div></div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon"><i class="ti ti-certificate" aria-hidden="true"></i></div>
+      <div class="cert-info"><h4>ALX Professional Foundations</h4><p>ALX Africa · Apr 2025</p><div class="cert-score">Certificate of Completion</div><div class="cert-detail">Professional Development Skills for the Digital Age · <a href="https://savanna.alxafrica.com/certificates/ecpmEY2CB3" target="_blank" style="color:var(--text3);text-decoration:none">Verify ↗</a></div></div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon"><i class="ti ti-certificate" aria-hidden="true"></i></div>
+      <div class="cert-info"><h4>ALX Backend Web Development</h4><p>ALX Africa · Sep 2025</p><div class="cert-score">Certificate of Completion</div><div class="cert-detail">Python, Django, DRF, APIs, MySQL, Git · <a href="https://savanna.alxafrica.com/certificates/Z8TH5ysL37" target="_blank" style="color:var(--text3);text-decoration:none">Verify ↗</a></div></div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon"><i class="ti ti-circuit-board" aria-hidden="true"></i></div>
+      <div class="cert-info"><h4>High-Speed Design Foundations</h4><p>EEcosystem Masterclass · Sep 2025</p><div class="cert-score">MS-Level · 10 hrs</div><div class="cert-detail">Signal & power integrity, EMI, RLC, FFT, ADS — Prof. Eric Bogatin</div></div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon"><i class="ti ti-cpu" aria-hidden="true"></i></div>
+      <div class="cert-info"><h4>Altium Education — PCB Basic Design</h4><p>Altium Education · Apr 2026</p><div class="cert-score">Certificate of Completion</div><div class="cert-detail">ID: cert_64r8bxrm</div></div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon"><i class="ti ti-antenna" aria-hidden="true"></i></div>
+      <div class="cert-info"><h4>DICE-EV0004 — 5G Technologies &amp; Services</h4><p>Aalto University · Jul 2025</p><div class="cert-score">Certificate of Participation · 3 ECTS</div><div class="cert-detail">Aalto, AAU, OAU, NUST · Espoo, Finland</div></div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon"><i class="ti ti-trophy" aria-hidden="true"></i></div>
+      <div class="cert-info"><h4>Certificate of Excellence Award</h4><p>MiNT &amp; Ethio-Robo Robotics · Mar 2025</p><div class="cert-score">African Robotics Championship</div><div class="cert-detail">Team 5KBot · 1st place all categories · VEX V5/U Division</div></div>
+    </div>
+  </div>
+  <div style="margin-top:1.5rem;border:1px solid var(--border)">
+    <div style="padding:.75rem 1.25rem;border-bottom:1px solid var(--border)"><span class="sec-title" style="font-size:10px">Languages</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)">
+      <div class="cert-card"><div class="cert-icon"><i class="ti ti-language" aria-hidden="true"></i></div><div class="cert-info"><h4>Amharic</h4><p>Native or bilingual proficiency</p></div></div>
+      <div class="cert-card"><div class="cert-icon"><i class="ti ti-language" aria-hidden="true"></i></div><div class="cert-info"><h4>English</h4><p>Full professional proficiency</p><div class="cert-score">IELTS 8.5 — CEFR C2</div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <p style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:.5rem;letter-spacing:-.01em">Yafet Daniel</p>
+  <p><a href="mailto:japhethdanny@gmail.com">japhethdanny@gmail.com</a> &nbsp;·&nbsp; +251-942-547-169 &nbsp;·&nbsp; <a href="https://github.com/JaphD" target="_blank">GitHub</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/yafet-daniel-6602a6334/" target="_blank">LinkedIn</a> &nbsp;·&nbsp; Addis Ababa, ET</p>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div><h2 id="modal-title"></h2><p id="modal-subtitle"></p></div>
+      <button class="close-btn" onclick="closeModalDirect()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-tabs">
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="viewer">3D View</button>
+      <button class="tab-btn" data-tab="gallery">Gallery</button>
+      <button class="tab-btn" data-tab="specs">Specs</button>
+    </div>
+    <div class="tab-pane active" id="tab-overview"></div>
+    <div class="tab-pane" id="tab-viewer">
+      <div id="viewer-container"><canvas id="viewer-canvas"></canvas><div class="viewer-hint">Drag to rotate · Scroll to zoom</div></div>
+      <div style="display:flex;gap:8px;margin-top:1rem">
+        <button class="btn"><i class="ti ti-download" aria-hidden="true"></i> STEP File</button>
+        <button class="btn"><i class="ti ti-download" aria-hidden="true"></i> Gerbers</button>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab-gallery"></div>
+    <div class="tab-pane" id="tab-specs"></div>
+  </div>
+</div>
+
+<script>
+const PROJECTS=[
+  {id:1,category:"biomedical",title:"ECG Monitoring & Telemetry — REV 1",desc:"ATM-card-sized wearable ECG node built around the STM32 and ADS1292R AFE. Features a full battery management system — Li-Ion cell with USB-C charging via a dedicated charger IC, PMOS power path switching (USB-C in: battery isolated and charging; USB-C out: battery powers the board), a buck for the 3.3 V rail, and a TI power-gating switch MCU-controlled to feed the 3.7 V rail directly to the A7670G LTE module. Cellular data via A7670G + U.FL antenna + nano-SIM. LIS3DH IMU logs X/Y/Z acceleration and triggers fall-detection interrupts to supplement ECG context. MicroSD for local data logging. SWD/UART debug header included. Printed at JLCPCB March 2026 — tested and verified working.",status:"production",statusLabel:"Printed & Verified",tools:"Altium Designer",layers:4,size:"~ATM card",specs:{Layers:"4","Stack-up":"JLC Standard 4-Layer","Board Size":"ATM card (~86×54 mm)","MCU":"STM32","AFE":"ADS1292RIPBSR","Cellular":"A7670G + U.FL + nano-SIM","IMU":"LIS3DH (3-axis, fall detect)","Power":"Li-Ion, USB-C charge, PMOS path","Rails":"3.3 V buck, 3.7 V gated","Storage":"MicroSD","Debug":"5-pin SWD/UART header","Fab":"JLCPCB — Mar 2026"},tags:["ECG","STM32","LTE","IMU","BMS","4-Layer"],hasPCB:true,verified:true},
+  {id:2,category:"biomedical",title:"ECG Monitoring & Telemetry — REV 2",desc:"Revised ECG telemetry board addressing REV 1 power architecture lessons. Load switch removed; power architecture simplified to an LDO for the 3.3 V rail and a buck converter for the A7670G — both supplied directly from USB-C. Retains the STM32, ADS1292R AFE, A7670G cellular module, LIS3DH IMU, MicroSD logging, and SWD debug header from REV 1. Same 4-layer JLC stackup. Printed at JLCPCB May 2026 — tested and verified working.",status:"production",statusLabel:"Printed & Verified",tools:"Altium Designer",layers:4,size:"~ATM card",specs:{Layers:"4","Stack-up":"JLC Standard 4-Layer","Board Size":"~ATM card","MCU":"STM32","AFE":"ADS1292RIPBSR","Cellular":"A7670G + U.FL + nano-SIM","IMU":"LIS3DH (3-axis, fall detect)","Power":"USB-C direct","Rails":"3.3 V LDO, buck for A7670G","Storage":"MicroSD","Debug":"5-pin SWD/UART header","Fab":"JLCPCB — May 2026","Change from REV1":"No load switch; simplified power"},tags:["ECG","STM32","LTE","IMU","4-Layer","REV2"],hasPCB:true,verified:true},
+  {id:3,category:"iot",title:"Dual Telemetry Air Quality Monitor",desc:"Space-optimised, USB-C powered environmental sensing node integrating the ESP32-S3, Sensirion SEN55 particulate and gas sensor, and SIM7080G NB-IoT/LTE-M module for dual-path telemetry over Wi-Fi and cellular. Designed for deployment in the C40-funded Air Quality Monitoring Project. 4-layer JLC stackup.",status:"prototype",statusLabel:"Prototype",tools:"Altium Designer",layers:4,size:"Compact",specs:{Layers:"4","Stack-up":"JLC Standard 4-Layer","MCU":"ESP32-S3","Sensor":"Sensirion SEN55 (PM, VOC, NOx, RH, T)","Cellular":"SIM7080G (NB-IoT / LTE-M)","Connectivity":"Wi-Fi + Cellular","Power":"USB-C","Project":"C40 Air Quality Initiative"},tags:["ESP32-S3","Air Quality","IoT","SIM7080G","SEN55"],hasPCB:true,verified:false},
+  {id:4,category:"power",title:"Buck-Boost Converter — LM5175",desc:"Wide input range, high-efficiency synchronous 4-switch buck-boost DC-DC converter based on the Texas Instruments LM5175. Accepts 6–36 V input and delivers a regulated 12 V at 6 A output. Designed for applications requiring stable output across input voltages both above and below the target rail.",status:"prototype",statusLabel:"Prototype",tools:"Altium Designer",layers:4,size:"—",specs:{Layers:"4","Controller":"LM5175PWR (TI)","Topology":"4-Switch Synchronous Buck-Boost","Vin":"6–36 V","Vout":"12 V","Iout":"6 A","Max Power":"72 W"},tags:["Buck-Boost","LM5175","Power","DC-DC"],hasPCB:true,verified:false},
+  {id:5,category:"pcb",title:"STM32 + BMI088 IMU Breakout",desc:"Compact 2-layer motion sensing board combining a USB-C power input, a buck converter for regulated supply, an STM32F0 microcontroller, and a Bosch BMI088 6-axis IMU. Ground pours on both layers. Intended for applications requiring precise, low-noise inertial measurements in a small form factor.",status:"prototype",statusLabel:"Prototype",tools:"Altium Designer",layers:2,size:"Compact",specs:{Layers:"2","Pour":"GND pour both layers","MCU":"STM32F0","IMU":"Bosch BMI088 (6-axis)","Power":"USB-C + Buck","Application":"Motion sensing"},tags:["STM32","IMU","BMI088","2-Layer","Motion"],hasPCB:true,verified:false}
+];
+const badgeClass={production:"badge-prod",prototype:"badge-proto",progress:"badge-prog"};
+const catLabel={biomedical:"Biomedical",iot:"IoT / Wireless",power:"Power Electronics",pcb:"PCB Design"};
+function getBadge(p){
+  if(p.verified) return `<span class="badge badge-verified"><i class="ti ti-circle-check" aria-hidden="true"></i> Printed & Verified</span>`;
+  return `<span class="badge ${badgeClass[p.status]}">${p.statusLabel}</span>`;
+}
+function mulberry32(a){let s=a;return function(){s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+
+function drawPCBThumb(container,seed){
+  const cv=document.createElement("canvas");cv.width=300;cv.height=170;cv.style.cssText="width:100%;height:100%;display:block";
+  container.appendChild(cv);const ctx=cv.getContext("2d"),r=mulberry32(seed);
+  ctx.fillStyle="#080808";ctx.fillRect(0,0,300,170);
+  // subtle dot grid
+  ctx.fillStyle="rgba(255,255,255,.06)";
+  for(let x=12;x<300;x+=18)for(let y=12;y<170;y+=18) ctx.fillRect(x,y,1,1);
+  // traces white/gray
+  ctx.lineWidth=1;
+  for(let i=0;i<22;i++){
+    const x1=10+r()*280,y1=10+r()*150,x2=10+r()*280,y2=10+r()*150;
+    const alpha=.15+r()*.25;
+    ctx.strokeStyle=`rgba(255,255,255,${alpha})`;
+    ctx.beginPath();ctx.moveTo(x1,y1);
+    r()>.5?(ctx.lineTo(x2,y1),ctx.lineTo(x2,y2)):(ctx.lineTo(x1,y2),ctx.lineTo(x2,y2));
+    ctx.stroke();
+  }
+  // ICs
+  [[50,45,46,30],[158,30,34,22],[128,105,42,26]].forEach(([x,y,w,h],i)=>{
+    ctx.fillStyle="#111";ctx.fillRect(x,y,w,h);
+    ctx.strokeStyle="rgba(255,255,255,.25)";ctx.lineWidth=.7;ctx.strokeRect(x,y,w,h);
+    for(let p=0;p<Math.floor(w/8);p++){ctx.fillStyle="rgba(200,146,42,.8)";ctx.fillRect(x+p*8+2,y-2,4,2);ctx.fillRect(x+p*8+2,y+h,4,2);}
+    ctx.fillStyle="rgba(255,255,255,.3)";ctx.font="7px monospace";ctx.fillText("U"+(i+1),x+4,y+11);
+  });
+  // vias
+  for(let i=0;i<22;i++){
+    const x=15+r()*270,y=10+r()*150;
+    ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);ctx.fillStyle="rgba(200,146,42,.7)";ctx.fill();
+    ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);ctx.fillStyle="#080808";ctx.fill();
+  }
+  // caps
+  for(let i=0;i<5;i++){
+    const x=15+r()*270,y=10+r()*150;
+    ctx.fillStyle="#1a1a2e";ctx.fillRect(x-3,y-5,6,10);
+    ctx.fillStyle="#334";ctx.fillRect(x-2,y-4,4,8);
+    ctx.fillStyle="rgba(200,146,42,.6)";ctx.fillRect(x-3,y-6,6,2);ctx.fillRect(x-3,y+4,6,2);
+  }
+  ctx.strokeStyle="rgba(255,255,255,.15)";ctx.lineWidth=1.5;ctx.strokeRect(6,6,288,158);
+  [[16,16],[284,16],[16,154],[284,154]].forEach(([x,y])=>{
+    ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fillStyle="#080808";ctx.fill();
+    ctx.strokeStyle="rgba(200,146,42,.5)";ctx.lineWidth=1;ctx.stroke();
+  });
+}
+
+function renderCards(filter){
+  const grid=document.getElementById("project-grid");grid.innerHTML="";
+  PROJECTS.filter(p=>filter==="all"||p.category===filter).forEach(p=>{
+    const card=document.createElement("div");card.className="card";
+    card.innerHTML=`<div class="card-thumb" id="th-${p.id}"></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-cat">${catLabel[p.category]||"Other"}</span>${getBadge(p)}</div>
+      <h3>${p.title}</h3><p>${p.desc}</p>
+      <div class="card-specs">
+        ${p.layers?`<span class="spec"><i class="ti ti-layers-subtract" aria-hidden="true"></i>${p.layers}L</span>`:""}
+        <span class="spec"><i class="ti ti-ruler" aria-hidden="true"></i>${p.size}</span>
+        <span class="spec"><i class="ti ti-tool" aria-hidden="true"></i>${p.tools.split(",")[0].trim()}</span>
+      </div>
+    </div>`;
+    card.addEventListener("click",()=>openModal(p));
+    grid.appendChild(card);
+    const th=document.getElementById(`th-${p.id}`);
+    th.style.cssText="height:170px;background:#080808;position:relative;overflow:hidden";
+    if(p.hasPCB)drawPCBThumb(th,p.id*997+31);
+    else th.innerHTML=`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center"><i class="ti ti-box" style="font-size:32px;color:#333" aria-hidden="true"></i></div>`;
+  });
+}
+
+let renderer3d=null,scene3d=null,camera3d=null,animId=null;
+function init3DViewer(){
+  const canvas=document.getElementById("viewer-canvas");
+  if(renderer3d){renderer3d.dispose();cancelAnimationFrame(animId);}
+  renderer3d=new THREE.WebGLRenderer({canvas,antialias:true});
+  renderer3d.setSize(canvas.offsetWidth||780,canvas.offsetHeight||340);
+  renderer3d.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  scene3d=new THREE.Scene();scene3d.background=new THREE.Color(0x050505);
+  camera3d=new THREE.PerspectiveCamera(45,canvas.offsetWidth/canvas.offsetHeight,.01,100);
+  camera3d.position.set(0,.07,.15);
+  scene3d.add(new THREE.AmbientLight(0xffffff,.5));
+  const d1=new THREE.DirectionalLight(0xffffff,.7);d1.position.set(1,2,1);scene3d.add(d1);
+  const d2=new THREE.DirectionalLight(0xaaaaaa,.3);d2.position.set(-1,1,-1);scene3d.add(d2);
+  const board=new THREE.Mesh(new THREE.BoxGeometry(.11,.002,.075),new THREE.MeshStandardMaterial({color:0x0a0a0a,roughness:.7,metalness:.2}));scene3d.add(board);
+  const cu=new THREE.Mesh(new THREE.BoxGeometry(.108,.0002,.073),new THREE.MeshStandardMaterial({color:0xc8922a,roughness:.2,metalness:.95}));cu.position.y=.0011;scene3d.add(cu);
+  [{w:.02,h:.003,d:.014,x:-.025,z:-.01},{w:.013,h:.003,d:.009,x:.015,z:.012},{w:.009,h:.003,d:.009,x:-.01,z:.022},{w:.022,h:.003,d:.007,x:.022,z:-.02}].forEach(c=>{
+    const m=new THREE.Mesh(new THREE.BoxGeometry(c.w,c.h,c.d),new THREE.MeshStandardMaterial({color:0x111111,roughness:.9}));m.position.set(c.x,.002,c.z);scene3d.add(m);
+  });
+  for(let i=0;i<7;i++){const cyl=new THREE.Mesh(new THREE.CylinderGeometry(.0022,.0022,.007,16),new THREE.MeshStandardMaterial({color:0x223,roughness:.5,metalness:.4}));cyl.position.set(-.044+i*.013,.005,-.026+Math.sin(i)*.018);scene3d.add(cyl);}
+  for(let i=0;i<14;i++){const res=new THREE.Mesh(new THREE.BoxGeometry(.003,.0012,.002),new THREE.MeshStandardMaterial({color:0x555,roughness:.9}));res.position.set(-.044+i*.007,.0016,.014+Math.cos(i)*.012);scene3d.add(res);}
+  for(let i=0;i<20;i++){const via=new THREE.Mesh(new THREE.CylinderGeometry(.0008,.0008,.0023,8),new THREE.MeshStandardMaterial({color:0xd4a040,metalness:.95,roughness:.1}));via.position.set(-.048+i*.005,.001,-.032+Math.random()*.064);scene3d.add(via);}
+  scene3d.add(new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(.11,.002,.075)),new THREE.LineBasicMaterial({color:0x444444})));
+  let drag=false,prev={x:0,y:0},sph={t:.4,p:1.1,r:.15};
+  const upd=()=>{camera3d.position.set(sph.r*Math.sin(sph.p)*Math.sin(sph.t),sph.r*Math.cos(sph.p),sph.r*Math.sin(sph.p)*Math.cos(sph.t));camera3d.lookAt(0,0,0);};upd();
+  const mv=(cx,cy)=>{if(!drag)return;sph.t-=(cx-prev.x)*.008;sph.p=Math.max(.2,Math.min(Math.PI-.1,sph.p-(cy-prev.y)*.008));prev={x:cx,y:cy};upd();};
+  canvas.addEventListener("mousedown",e=>{drag=true;prev={x:e.clientX,y:e.clientY}});
+  canvas.addEventListener("mousemove",e=>mv(e.clientX,e.clientY));
+  canvas.addEventListener("mouseup",()=>drag=false);
+  canvas.addEventListener("wheel",e=>{sph.r=Math.max(.07,Math.min(.3,sph.r+e.deltaY*.0001));upd();},{passive:true});
+  canvas.addEventListener("touchstart",e=>{drag=true;prev={x:e.touches[0].clientX,y:e.touches[0].clientY}},{passive:true});
+  canvas.addEventListener("touchmove",e=>mv(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
+  canvas.addEventListener("touchend",()=>drag=false);
+  const anim=()=>{animId=requestAnimationFrame(anim);if(!drag)sph.t+=.005;upd();renderer3d.render(scene3d,camera3d);};anim();
+}
+
+function openModal(p){
+  document.getElementById("modal-title").textContent=p.title;
+  document.getElementById("modal-subtitle").textContent=`${catLabel[p.category]} · ${p.verified?"Printed & Verified at JLCPCB":p.statusLabel}`;
+  document.getElementById("tab-overview").innerHTML=`
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1.25rem;line-height:1.8">${p.desc}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+    ${getBadge(p)}
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:1.25rem">
+      ${p.hasPCB?`<button class="btn" onclick="switchTab('viewer')"><i class="ti ti-cube-3d-sphere" aria-hidden="true"></i> 3D View</button>`:""}
+      <button class="btn" onclick="switchTab('gallery')"><i class="ti ti-photo" aria-hidden="true"></i> Gallery</button>
+      <button class="btn" onclick="switchTab('specs')"><i class="ti ti-list-details" aria-hidden="true"></i> Specs</button>
+    </div>`;
+  document.getElementById("tab-specs").innerHTML=`<div class="specs-grid">${Object.keys(p.specs).map(k=>`<div class="spec-block"><label>${k}</label><span class="spec-val">${p.specs[k]}</span></div>`).join("")}</div><p style="font-size:11px;color:var(--text3);margin-top:1rem;letter-spacing:.04em">Tools: ${p.tools}</p>`;
+  document.getElementById("tab-gallery").innerHTML=`<p style="font-size:12px;color:var(--text2);margin-bottom:1rem">Add schematic screenshots, layout views, and build photos here.</p><div class="gallery">${[1,2,3,4].map(_=>`<div class="gallery-placeholder"><i class="ti ti-photo-plus" aria-hidden="true"></i><span>Add image</span></div>`).join("")}</div>`;
+  document.querySelector('[data-tab="viewer"]').style.display=p.hasPCB?"":"none";
+  switchTab("overview");
+  document.getElementById("modal-overlay").classList.add("open");
+  if(p.hasPCB)setTimeout(()=>init3DViewer(),100);
+}
+function switchTab(t){
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));
+  document.querySelectorAll(".tab-pane").forEach(p=>p.classList.toggle("active",p.id==="tab-"+t));
+  if(t==="viewer")setTimeout(()=>init3DViewer(),50);
+}
+document.querySelectorAll(".tab-btn").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
+function closeModal(e){if(e.target===document.getElementById("modal-overlay"))closeModalDirect();}
+function closeModalDirect(){document.getElementById("modal-overlay").classList.remove("open");if(renderer3d){renderer3d.dispose();cancelAnimationFrame(animId);renderer3d=null;}}
+document.querySelectorAll(".filter-btn").forEach(b=>{
+  b.addEventListener("click",()=>{document.querySelectorAll(".filter-btn").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderCards(b.dataset.filter);});
+});
+renderCards("all");
+
+// Hamburger toggle
+const navToggle=document.getElementById("nav-toggle");
+const navLinks=document.getElementById("nav-links");
+navToggle.addEventListener("click",()=>{navLinks.classList.toggle("open");});
+navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>navLinks.classList.remove("open")));
+
+// Active nav on scroll
+const navAnchors=document.querySelectorAll(".nav-links a[href^='#']");
+const sections=[...document.querySelectorAll("section.cv-section, footer[id]")];
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navAnchors.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id));
+    }
+  });
+},{rootMargin:"-52px 0px -60% 0px",threshold:0});
+sections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
