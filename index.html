@@ -96,7 +96,44 @@
           <div><p class="project-role">Addis Ababa University - Advisor: Dr. Biniam Tadesse</p><h3>Wearable ECG Platform for Remote Cardiac Telemetry</h3><p>A four-layer wearable platform combining an STM32L452RET6, ADS1292R analog front end, LIS3DH motion sensor, microSD logging, rechargeable USB-C power, and LTE Cat-1 telemetry.</p></div>
           <div class="project-evidence"><h4>Evidence</h4><ul><li>Validated ECG acquisition, local logging, and batch telemetry at 250 samples/s.</li><li>Completed a three-hour LTE/SD soak test with 339 device-confirmed HTTPS uploads and 847,500 ECG/motion samples.</li><li>Recovered from transient LTE/TLS failures while maintaining approximately 249-250 samples/s.</li><li>Research-only evaluation reached 91.6% AF recall and 82.4% three-rhythm macro F1.</li></ul><a class="text-link" href="https://github.com/JaphD/ecg-monitoring-telemetry" target="_blank" rel="noopener noreferrer">Review ECG repository</a></div>
         </div>
-        <div class="tag-list" aria-label="ECG platform technologies"><span>STM32</span><span>ADS1292R</span><span>LTE</span><span>Mixed signal</span><span>Embedded C</span></div>
+        <div class="project-gallery" data-gallery="ecg-platform" aria-label="ECG platform hardware evidence">
+          <div class="gallery-rail">
+            <figure data-gallery-slide>
+              <img src="assets/images/projects/ecg-platform/assembled-enclosure.jpg"
+                   width="1600" height="1200"
+                   alt="Assembled ECG telemetry board installed in its yellow enclosure"
+                   loading="lazy" decoding="async">
+              <figcaption>Assembled sensing and telemetry board fitted inside the prototype enclosure.</figcaption>
+            </figure>
+            <figure data-gallery-slide>
+              <img src="assets/images/projects/ecg-platform/assembled-open.jpg"
+                   width="1214" height="1600"
+                   alt="ECG telemetry board connected to its battery and cellular antenna"
+                   loading="lazy" decoding="async">
+              <figcaption>Complete hardware stack connected outside the enclosure for bring-up and validation.</figcaption>
+            </figure>
+            <figure data-gallery-slide>
+              <img src="assets/images/projects/ecg-platform/pcb-layout.png"
+                   width="1286" height="855"
+                   alt="Altium three-dimensional layout of the multilayer ECG telemetry board"
+                   loading="lazy" decoding="async">
+              <figcaption>Multilayer PCB layout integrating ECG acquisition, processing, storage, power, and LTE telemetry.</figcaption>
+            </figure>
+            <figure data-gallery-slide>
+              <img src="assets/images/projects/ecg-platform/schematic-overview.png"
+                   width="1028" height="682"
+                   alt="Hierarchical schematic overview of the ECG telemetry platform"
+                   loading="lazy" decoding="async">
+              <figcaption>Hierarchical system overview linking the analog front end, MCU, storage, IMU, radio, and power blocks.</figcaption>
+            </figure>
+          </div>
+          <div class="gallery-controls">
+            <button type="button" data-gallery-previous aria-label="Show previous project image">Previous</button>
+            <p class="gallery-status" aria-live="polite"><span data-gallery-current>1</span> / <span data-gallery-total>4</span></p>
+            <button type="button" data-gallery-next aria-label="Show next project image">Next</button>
+          </div>
+        </div>
+        <div class="tag-list" aria-label="ECG platform technologies"><span>STM32</span><span>ADS1292R</span><span>LTE</span><span>Altium</span><span>Multilayer PCB</span><span>Mixed signal</span><span>Embedded C</span></div>
       </article>
       <article class="project-card project-card-featured">
         <div class="project-meta"><span>02</span><span>Urban sensing</span><span>Hardware lead</span></div>
@@ -104,12 +141,42 @@
           <div><p class="project-role">C40-funded initiative - Addis Ababa University</p><h3>AddisAirNet Air Quality Monitoring Platform</h3><p>Custom environmental sensing hardware supporting an urban air-quality research and policy initiative involving C40 Cities and the Addis Ababa Environmental Protection Authority.</p></div>
           <div class="project-evidence"><h4>Contribution</h4><ul><li>Led hardware development supporting ten sensing units across Addis Ababa.</li><li>Designed and iterated Altium PCBs for low-cost PM2.5 and environmental sensing nodes.</li><li>Supported local fabrication and coordinated validation across firmware, data, and mechanical teams.</li></ul></div>
         </div>
+        <div class="project-gallery" data-gallery="addisairnet" aria-label="AddisAirNet prototype evidence">
+          <div class="gallery-rail">
+            <figure data-gallery-slide>
+              <img src="assets/images/projects/addisairnet/assembled-open.jpg"
+                   width="600" height="800"
+                   alt="Assembled AddisAirNet sensor prototype with the enclosure lid removed"
+                   loading="lazy" decoding="async">
+              <figcaption>Assembled sensing node during mechanical integration and fit checking.</figcaption>
+            </figure>
+            <figure data-gallery-slide>
+              <img src="assets/images/projects/addisairnet/enclosure.jpg"
+                   width="600" height="800"
+                   alt="Completed white enclosure for the AddisAirNet sensing node"
+                   loading="lazy" decoding="async">
+              <figcaption>Completed compact enclosure prepared for environmental monitoring deployment.</figcaption>
+            </figure>
+            <figure data-gallery-slide>
+              <img src="assets/images/projects/addisairnet/pcb-layout.jpg"
+                   width="600" height="800"
+                   alt="Locally fabricated PCB for the AddisAirNet air quality sensor"
+                   loading="lazy" decoding="async">
+              <figcaption>Locally fabricated sensing PCB used during the prototype iteration.</figcaption>
+            </figure>
+          </div>
+          <div class="gallery-controls">
+            <button type="button" data-gallery-previous aria-label="Show previous project image">Previous</button>
+            <p class="gallery-status" aria-live="polite"><span data-gallery-current>1</span> / <span data-gallery-total>3</span></p>
+            <button type="button" data-gallery-next aria-label="Show next project image">Next</button>
+          </div>
+        </div>
         <div class="tag-list" aria-label="AddisAirNet technologies"><span>Air quality</span><span>Altium</span><span>Environmental sensing</span><span>Team validation</span></div>
       </article>
       <article class="project-card project-card-featured">
         <div class="project-meta"><span>03</span><span>Power electronics</span><span>Design complete</span></div>
         <div class="project-content">
-          <div><p class="project-role">Independent hardware project</p><h3>PD Smart Supply</h3><p>A compact USB-C Power Delivery supply with selectable 5 V, 9 V, 12 V, and 20 V outputs, protected output up to 20 V at 3 A, STM32 control, voltage/current monitoring, and an OLED interface.</p></div>
+          <div><p class="project-role">Independent hardware project</p><h3>PD Smart Supply</h3><p>A compact USB-C Power Delivery supply with selectable 5 V, 9 V, 12 V, and 20 V outputs, protected output up to 20 V at 3 A, STM32 control, voltage/current monitoring, and an OLED interface. Up, Down, and Select pushbuttons provide direct user interaction for choosing the requested 5 V, 9 V, 12 V, or 20 V output.</p></div>
           <div class="project-evidence"><h4>Status</h4><ul><li>Completed four-layer KiCad layout, DRC/DFM review, BOM, placement data, and Gerbers.</li><li>Integrated CH224A PD control, TPS259470L protection, TPS560430 regulation, sensing, SWD, and test points.</li><li>Physical bring-up remains pending component availability; listed ratings are design targets.</li></ul><a class="text-link" href="https://github.com/JaphD/USB-C-PD-Smart-Power-Supply" target="_blank" rel="noopener noreferrer">Review design files</a></div>
         </div>
         <div class="project-gallery" data-gallery="pd-smart-supply" aria-label="PD Smart Supply design evidence">
@@ -123,10 +190,10 @@
             </figure>
             <figure data-gallery-slide>
               <img src="assets/images/projects/pd-smart-supply/pcb-layout.png"
-                   width="1046" height="757"
-                   alt="KiCad routing view of the four-layer PD Smart Supply PCB"
+                   width="899" height="677"
+                   alt="PCB layout view of the four-layer PD Smart Supply"
                    loading="lazy" decoding="async">
-              <figcaption>PCB routing view used for design-rule and manufacturing review.</figcaption>
+              <figcaption>Updated PCB layout showing the routing, controls, output terminals, and board dimensions.</figcaption>
             </figure>
           </div>
           <div class="gallery-controls">
@@ -141,10 +208,44 @@
     <section id="projects" class="section section-tinted" aria-labelledby="projects-title">
       <div class="section-heading"><p class="section-kicker">Technical breadth</p><h2 id="projects-title">Additional engineering work</h2></div>
       <div class="project-grid">
-        <article class="project-card project-card-compact"><p class="project-status">Prototype architecture</p><h3>Dual-Telemetry Air Quality Node</h3><p>Four-layer ESP32-S3, SEN55, and SIM7080G environmental node with Wi-Fi, cellular telemetry, USB-C power, microSD logging, and RF-aware routing.</p><div class="tag-list"><span>ESP32-S3</span><span>LTE-M / NB-IoT</span><span>RF layout</span></div></article>
+        <article class="project-card project-card-compact project-card-media"><p class="project-status">Prototype architecture</p><h3>Dual-Telemetry Air Quality Node</h3><p>Four-layer ESP32-S3, SEN55, and SIM7080G environmental node with Wi-Fi, cellular telemetry, USB-C power, microSD logging, and RF-aware routing.</p>
+          <div class="project-gallery project-gallery-compact" data-gallery="dual-telemetry" aria-label="Dual-Telemetry Air Quality Node design evidence">
+            <div class="gallery-rail">
+              <figure data-gallery-slide>
+                <img src="assets/images/projects/dual-telemetry/pcb-3d.png"
+                     width="1010" height="931"
+                     alt="Three-dimensional PCB view of the Dual-Telemetry Air Quality Node"
+                     loading="lazy" decoding="async">
+                <figcaption>PCB 3D view with Wi-Fi and cellular telemetry, sensing, storage, and USB-C power.</figcaption>
+              </figure>
+              <figure data-gallery-slide>
+                <img src="assets/images/projects/dual-telemetry/system-overview.png"
+                     width="1041" height="824"
+                     alt="System schematic overview of the Dual-Telemetry Air Quality Node"
+                     loading="lazy" decoding="async">
+                <figcaption>System overview connecting power management, the ESP32-S3 telemetry controller, and the sensor/storage block.</figcaption>
+              </figure>
+            </div>
+            <div class="gallery-controls">
+              <button type="button" data-gallery-previous aria-label="Show previous project image">Previous</button>
+              <p class="gallery-status" aria-live="polite"><span data-gallery-current>1</span> / <span data-gallery-total>2</span></p>
+              <button type="button" data-gallery-next aria-label="Show next project image">Next</button>
+            </div>
+          </div>
+          <div class="tag-list"><span>ESP32-S3</span><span>LTE-M / NB-IoT</span><span>RF layout</span></div>
+        </article>
         <article class="project-card project-card-compact"><p class="project-status">Course project</p><h3>16-bit Datapath and Control Logic</h3><p>Accumulator-based datapath integrating cascaded adders, multiplexers, shift registers, overflow detection, operation decoding, and combinational control.</p><a class="text-link" href="https://github.com/JaphD/16-bit-datapath-and-control" target="_blank" rel="noopener noreferrer">Review simulation project</a></article>
         <article class="project-card project-card-compact"><p class="project-status">PCB design</p><h3>STM32 + BMI088 Hardware</h3><p>Microcontroller board integrating USB-C, an LTC3405 buck converter, STM32F0, and Bosch BMI088 motion sensing over SPI.</p><a class="text-link" href="https://github.com/JaphD/STM32_BMI088_System" target="_blank" rel="noopener noreferrer">Review hardware files</a></article>
-        <article class="project-card project-card-compact"><p class="project-status">Competition system</p><h3>5Kbot VEX V5</h3><p>Interdisciplinary robot development, wiring, sensor integration, and autonomous/driver-controlled features for a championship-winning team.</p><a class="text-link" href="https://github.com/JaphD/Vex-V5" target="_blank" rel="noopener noreferrer">Review VEX code</a></article>
+        <article class="project-card project-card-compact"><p class="project-status">Competition system</p><h3>5Kbot VEX V5</h3><p>Team-designed VEX V5 robot built from the supplied kit, integrating custom mechanical construction, wiring, electrical integration, and autonomous and driver-controlled competition strategies.</p>
+          <figure class="project-inline-media">
+            <img src="assets/images/projects/5kbot/final-robot.jpg"
+                 width="1280" height="960"
+                 alt="Final Team 5Kbot VEX V5 competition robot"
+                 loading="lazy" decoding="async">
+            <figcaption>Final competition robot developed by Team 5Kbot (20251A).</figcaption>
+          </figure>
+          <a class="text-link" href="https://github.com/JaphD/Vex-V5" target="_blank" rel="noopener noreferrer">Review VEX code</a>
+        </article>
         <article class="project-card project-card-compact"><p class="project-status">Embedded simulation</p><h3>STM32 Bottle Inspection</h3><p>Simulated quality-control system with ADC level sensing, UART/LCD feedback, PWM defect diversion, and interrupt-driven emergency halt.</p><a class="text-link" href="https://github.com/JaphD/bottle-inspection-stm32-" target="_blank" rel="noopener noreferrer">Review embedded project</a></article>
       </div>
     </section>
