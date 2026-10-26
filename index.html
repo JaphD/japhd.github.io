@@ -218,8 +218,52 @@
           </div>
           <div class="tag-list"><span>ESP32-S3</span><span>LTE-M / NB-IoT</span><span>RF layout</span></div>
         </article>
-        <article class="project-card project-card-compact"><p class="project-status">Course project</p><h3>16-bit Datapath and Control Logic</h3><p>Accumulator-based datapath integrating cascaded adders, multiplexers, shift registers, overflow detection, operation decoding, and combinational control.</p><a class="text-link" href="https://github.com/JaphD/16-bit-datapath-and-control" target="_blank" rel="noopener noreferrer">Review simulation project</a></article>
-        <article class="project-card project-card-compact"><p class="project-status">PCB design</p><h3>STM32 + BMI088 Hardware</h3><p>Microcontroller board integrating USB-C, an LTC3405 buck converter, STM32F0, and Bosch BMI088 motion sensing over SPI.</p><a class="text-link" href="https://github.com/JaphD/STM32_BMI088_System" target="_blank" rel="noopener noreferrer">Review hardware files</a></article>
+        <article class="project-card project-card-compact project-card-media"><p class="project-status">Course project</p><h3>16-bit Datapath and Control Logic</h3><p>Accumulator-based Proteus simulation integrating cascaded adders, multiplexers, shift registers, overflow detection, operation decoding, and combinational control.</p>
+          <figure class="project-inline-media">
+            <a href="assets/images/projects/16-bit-datapath/proteus-schematic.png" target="_blank" rel="noopener noreferrer" aria-label="Open the full 16-bit datapath Proteus schematic">
+              <img src="assets/images/projects/16-bit-datapath/proteus-schematic.png"
+                   width="1062" height="777"
+                   alt="Proteus schematic overview of the 16-bit datapath, registers, control unit, and arithmetic logic"
+                   loading="lazy" decoding="async">
+            </a>
+            <figcaption>Proteus schematic overview; open the image for a closer look at the datapath and control blocks.</figcaption>
+          </figure>
+          <a class="text-link" href="https://github.com/JaphD/16-bit-datapath-and-control" target="_blank" rel="noopener noreferrer">Review simulation project</a>
+        </article>
+        <article class="project-card project-card-compact project-card-media"><p class="project-status">Hardware design - Rev A</p><h3>PhaseTag</h3><p>Compact 35 x 42.5 mm four-layer Bluetooth Channel Sounding tag designed around the nRF54L15, with selectable PCB antennas, motion sensing, and USB-C LiPo charging. Firmware, bring-up, antenna tuning, and ranging are not yet validated.</p>
+          <div class="project-gallery project-gallery-compact" data-gallery="phasetag" aria-label="PhaseTag board design views">
+            <div class="gallery-rail">
+              <figure data-gallery-slide>
+                <img src="assets/images/projects/phasetag/phasetag-top.png"
+                     width="600" height="717"
+                     alt="KiCad top-side render of the PhaseTag Bluetooth Channel Sounding PCB"
+                     loading="lazy" decoding="async">
+                <figcaption>Top-side KiCad render showing the radio, power circuitry, connectors, and two PCB antennas.</figcaption>
+              </figure>
+              <figure data-gallery-slide>
+                <img src="assets/images/projects/phasetag/phasetag-bottom.png"
+                     width="577" height="697"
+                     alt="KiCad bottom-side render of the PhaseTag PCB"
+                     loading="lazy" decoding="async">
+                <figcaption>Bottom-side render showing the compact four-layer board and routing.</figcaption>
+              </figure>
+              <figure data-gallery-slide>
+                <img src="assets/images/projects/phasetag/phasetag-layout.png"
+                     width="618" height="727"
+                     alt="KiCad PhaseTag PCB layout with 35 by 42.5 millimeter dimensions"
+                     loading="lazy" decoding="async">
+                <figcaption>PCB editor view with the 35 x 42.5 mm outline, component placement, and antenna keepouts.</figcaption>
+              </figure>
+            </div>
+            <div class="gallery-controls">
+              <button type="button" data-gallery-previous aria-label="Show previous project image">Previous</button>
+              <p class="gallery-status" aria-live="polite"><span data-gallery-current>1</span> / <span data-gallery-total>3</span></p>
+              <button type="button" data-gallery-next aria-label="Show next project image">Next</button>
+            </div>
+          </div>
+          <div class="tag-list"><span>nRF54L15</span><span>BLE Channel Sounding</span><span>KiCad</span><span>Four-layer PCB</span></div>
+          <a class="text-link" href="https://github.com/JaphD/Phasetag" target="_blank" rel="noopener noreferrer">Review design files</a>
+        </article>
         <article class="project-card project-card-compact project-card-media"><p class="project-status">Design complete</p><h3>PD Smart Supply</h3><p>Four-layer USB-C Power Delivery supply with protected outputs, STM32 control, sensing, and an OLED interface. Up, Down, and Select pushbuttons let the user choose a requested 5 V, 9 V, 12 V, or 20 V output. Physical bring-up is pending.</p>
           <div class="project-gallery project-gallery-compact" data-gallery="pd-smart-supply" aria-label="PD Smart Supply design evidence">
             <div class="gallery-rail">
@@ -281,4 +325,3 @@
   <footer class="site-footer"><p>Yafet Daniel - Electrical and Computer Engineering</p></footer>
 </body>
 </html>
-
